@@ -16,9 +16,13 @@
     </head>
     <body>
         <header>
+            <br>
             <h1>InstaGrim ! </h1>
             <h2>Your world in Black and White</h2>
         </header>
+        <ul>
+ 
+</ul>
         <nav>
             <ul>
 
@@ -42,12 +46,19 @@
                                         
                             
                     }%>
+                
+                
+                
             </ul>
         </nav>
+                    <br>
+                    <h3>What is instagrim?</h3>
+                    <p1>Instagrim is a website that allows you to store pictures and modify them.</p1>
+                    
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
-                <li>&COPY; Andy C</li>
+                
             </ul>
         </footer>
     </body>
