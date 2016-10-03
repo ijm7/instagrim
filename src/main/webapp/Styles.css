@@ -10,13 +10,59 @@ and open the template in the editor.
 
 
 nav {
-    text-align: left;
-    border: 2px;
-    float: right;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    overflow: hidden;
+    background-color:#333;
     
 }
 
-h1 {font-size: 3.5em;
-text-align:center;
-font-family:"Axure Handwriting", sans-serif;
+h1 {
+    font-size: 3.5em;
+    text-align:center;
+    font-family:"Axure Handwriting", sans-serif;
 }
+
+h2 {
+    font-size: 1em;
+    text-align:center;
+    font-family:"Arial",sans-serif;
+}
+
+h3 {
+    font-size: 3.1em;
+    text-align:center;
+    font-family:"Arial",sans-serif;
+}
+
+p1 {
+    font-size:2em;
+    text-align:left;
+    margin-left:auto;
+    margin-right:auto;
+    width:6em;
+    font-family:"Arial",sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    display:inline-block;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    background-color:#333;
+}
+
+li {float:left;}
+
+li a {
+    display:block;
+    color:grey;
+    text-align:center;
+    padding:14px 16px;
+    text-decoration: none;
+}
+li a:hover{background-color:#111;}
+header{line-height: 35%;}
