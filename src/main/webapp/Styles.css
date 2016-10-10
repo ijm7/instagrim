@@ -19,6 +19,13 @@ nav {
     
 }
 
+homebody{
+    line-height: 75%;
+    margin-left:auto;
+    margin-right:auto;
+    width:35em;
+}
+
 h1 {
     font-size: 3.5em;
     text-align:center;
@@ -34,25 +41,35 @@ h2 {
 h3 {
     font-size: 3.1em;
     text-align:center;
+    
     font-family:"Arial",sans-serif;
 }
 
-p1 {
+#para1 {
     font-size:2em;
     text-align:left;
     margin-left:auto;
     margin-right:auto;
-    width:6em;
+    width:35em;
     font-family:"Arial",sans-serif;
 }
 
-ul {
+ul.navbar {
     list-style-type: none;
     display:inline-block;
     margin:0;
     padding:0;
     overflow: hidden;
     background-color:#333;
+}
+
+logg {
+    text-align:center;
+    
+}
+p.loggtext{
+    text-align:center;
+    font-family: Arial,sans-serif;
 }
 
 li {float:left;}
@@ -63,6 +80,42 @@ li a {
     text-align:center;
     padding:14px 16px;
     text-decoration: none;
+    font-family: Arial,sans-serif;
 }
 li a:hover{background-color:#111;}
+
 header{line-height: 35%;}
+
+#list1
+{
+    background-color:white;
+}
+
+input[type=text] {padding:5px; border:2px solid #ccc; 
+-webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:16em;
+    font-size:1.8em;
+    
+}
+input[type=text]:focus {border-color:#333; }
+
+input[type=password] {padding:5px; border:2px solid #ccc; 
+-webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:16em;
+    font-size:1.8em;
+}
+input[type=password]:focus {border-color:#333; }
+
+input[type=submit] {padding:5px 15px; background:#ccc; border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    width:5em;
+    font-size:2em;
+    
+}
+
+input[type=submit]:focus {border-color:#333; }
+ 

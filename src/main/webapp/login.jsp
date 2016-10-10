@@ -15,28 +15,47 @@
     </head>
     <body>
         <header>
+            <br>
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
         </header>
         <nav>
-            <ul>
+            <ul class="navbar">
                 
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
        
-        <article>
+        <logg>
             <h3>Login</h3>
+            <!--
             <form method="POST"  action="Login">
                 <ul>
-                    <li>User Name <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
+                    <li id="list1">User Name <input type="text" name="username"></li>
+                    <li id="list1">Password <input type="password" name="password"></li>
                 </ul>
+                
+                <
+                <br/>
+                <input type="submit" value="Login"> 
+            </form>
+            -->
+            <form method="POST"  action="Login">
+               
+                <p class="loggtext">User Name</p> <input type="text" name="username">
+                <p class="loggtext">Password</p> <input type="password" name="password">
+                
+                
+                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <br/>
                 <input type="submit" value="Login"> 
             </form>
 
-        </article>
+        </logg>
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>

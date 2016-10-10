@@ -24,7 +24,7 @@
             </ul>
         </nav>
        
-        <article>
+        <!--<article>
             <h3>Register as user</h3>
             <form method="POST"  action="Register">
                 <ul>
@@ -32,10 +32,22 @@
                     <li>Password <input type="password" name="password"></li>
                 </ul>
                 <br/>
-                <input type="submit" value="Regidter"> 
+                <input type="submit" value="Register"> 
             </form>
 
-        </article>
+        </article>-->
+    <logg>
+        <form method="POST"  action="Register">
+        <p class="loggtext">User Name</p><input type="text" name="username">
+        <p class="loggtext">Password</p><input type="password" name="password">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <input type="submit" value="Register"> 
+        </form>
+    </logg>
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
