@@ -21,32 +21,46 @@
             <h2>Your world in Black and White</h2>
         </header>
 
+        
         <nav>
-            <ul class="navbar">
-                <li><a href="upload.jsp">Upload</a></li>
-                    <%
+            <%
                         
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
                             String UserName = lg.getUsername();
                             if (lg.getlogedin()) {
                     %>
+            
+            <ul class="navbar">
+                <li><a href="upload.jsp">Upload</a></li>
+                    
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                 <li><a>Welcome, <%=lg.getUsername()%></a></li> 
-                    <%}
-                            }else{
-                                %>
-                 <li style="float:right;"><a href="register.jsp">Register</a></li>
-                <li style="float:right;"><a href="login.jsp">Login</a></li>
-                <%
-                                        
-                            
-                    }%>
+                    
+                 
+                
                 
                 
                 
             </ul>
+                    <%}
+                            }else{
+                                %>
+                    
+                    <ul class="navbar">
+            
+                <li><a href="register.jsp">Register</a></li>
+                <li><a href="login.jsp">Login</a></li>
+                    <%}
+                    %>
+                
+                
+                
+            </ul>
+                    
+                    
+                    
         </nav>
     <homebody>
                     <br>
@@ -57,15 +71,9 @@
                             String UserName = lg.getUsername();
                             if (lg.getlogedin()) {
                     %>
-                    
-                    
-                    
-                    
                     <h3>Welcome, <%=lg.getUsername()%>!</h3>
                                 
-                                <form action="/Instagrim/Images/<%=lg.getUsername()%>"
-                                    <input type="submit" value="Your Images" />
-                                </form>
+                    <p id="para1">Click <a href="/Instagrim/Images/<%=lg.getUsername()%>">here</a> to go to your images</p>
                     <%}
                             }else{
                                 %>
