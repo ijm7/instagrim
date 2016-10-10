@@ -20,13 +20,9 @@
             <h1>InstaGrim ! </h1>
             <h2>Your world in Black and White</h2>
         </header>
-        <ul>
- 
-</ul>
-        <nav>
-            <ul>
 
-               
+        <nav>
+            <ul class="navbar">
                 <li><a href="upload.jsp">Upload</a></li>
                     <%
                         
@@ -37,11 +33,12 @@
                     %>
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                <li><a>Welcome, <%=lg.getUsername()%></a></li> 
                     <%}
                             }else{
                                 %>
-                 <li><a href="register.jsp">Register</a></li>
-                <li><a href="login.jsp">Login</a></li>
+                 <li style="float:right;"><a href="register.jsp">Register</a></li>
+                <li style="float:right;"><a href="login.jsp">Login</a></li>
                 <%
                                         
                             
@@ -51,9 +48,34 @@
                 
             </ul>
         </nav>
+    <homebody>
                     <br>
-                    <h3>What is instagrim?</h3>
-                    <p1>Instagrim is a website that allows you to store pictures and modify them.</p1>
+                    <br>
+                    <br>
+                    <%
+                        if (lg != null) {
+                            String UserName = lg.getUsername();
+                            if (lg.getlogedin()) {
+                    %>
+                    
+                    
+                    
+                    
+                    <h3>Welcome, <%=lg.getUsername()%>!</h3>
+                                
+                                <form action="/Instagrim/Images/<%=lg.getUsername()%>"
+                                    <input type="submit" value="Your Images" />
+                                </form>
+                    <%}
+                            }else{
+                                %>
+                                <h3>What is instagrim?</h3>
+                    
+                    <p id="para1">Instagrim is a website that allows you to store pictures and modify them.</p>
+                    <%
+                           
+                    }%>
+    </homebody>
                     
         <footer>
             <ul>
