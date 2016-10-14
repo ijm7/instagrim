@@ -36,7 +36,7 @@
                     
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                <li><a>Welcome, <%=lg.getUsername()%></a></li> 
+               
                     
                  
                 
