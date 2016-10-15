@@ -14,12 +14,13 @@
     </head>
     <body>
         <header>
+            <br>
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
         </header>
         <nav>
-            <ul>
-                
+            <ul class="navbar">
+                <li><a href="/Instagrim">Home</a></li>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </nav>

@@ -13,22 +13,27 @@
         <link rel="stylesheet" type="text/css" href="Styles.css" />
     </head>
     <body>
+        <header>
+            <br>
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
+        </header>
         <nav>
-            <ul>
-                <li class="nav"><a href="upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+            <ul class="navbar">
+                <li><a href="/Instagrim/Upload">Upload</a></li>
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
  
         <article>
             <h3>File Upload</h3>
             <form method="POST" enctype="multipart/form-data" action="Image">
-                File to upload: <input type="file" name="upfile"><br/>
+                <p class="loggtext">File to upload: <input type="file" name="upfile"></p><br/>
 
                 <br/>
-                <input type="submit" value="Press"> to upload the file!
+                <div class="centerer">
+                <input class="imasubmit" type="submit" value="Press">
+                </div>
             </form>
 
         </article>

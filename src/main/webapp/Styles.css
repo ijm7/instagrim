@@ -27,7 +27,7 @@ homebody{
 }
 
 h1 {
-    font-size: 3.5em;
+    font-size: 4.2em;
     text-align:center;
     font-family:"Axure Handwriting", sans-serif;
 }
@@ -119,3 +119,13 @@ input[type=submit] {padding:5px 15px; background:#ccc; border:0 none;
 
 input[type=submit]:focus {border-color:#333; }
  
+imasubmit
+{
+    position:absolute;
+    top:50%;
+}
+
+.centerer
+{
+    text-align:center;
+}

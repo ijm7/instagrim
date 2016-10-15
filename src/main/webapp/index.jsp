@@ -32,7 +32,7 @@
                     %>
             
             <ul class="navbar">
-                <li><a href="upload.jsp">Upload</a></li>
+                <li><a href="/Instagrim/Upload">Upload</a></li>
                     
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
@@ -50,8 +50,8 @@
                     
                     <ul class="navbar">
             
-                <li><a href="register.jsp">Register</a></li>
-                <li><a href="login.jsp">Login</a></li>
+                <li><a href="/Instagrim/Register">Register</a></li>
+                <li><a href="/Instagrim/Login">Login</a></li>
                     <%}
                     %>
                 

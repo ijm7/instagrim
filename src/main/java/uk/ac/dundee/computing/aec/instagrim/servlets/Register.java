@@ -32,7 +32,13 @@ public class Register extends HttpServlet {
         // TODO Auto-generated method stub
         cluster = CassandraHosts.getCluster();
     }
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
+        
+       RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+        rd.forward(request, response);
+        
+    }
 
 
 

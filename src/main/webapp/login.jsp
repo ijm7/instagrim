@@ -21,7 +21,7 @@
         </header>
         <nav>
             <ul class="navbar">
-                
+                <li><a href="/Instagrim">Home</a></li>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
@@ -50,7 +50,7 @@
                 <br/>
                 <br/>
                 <br/>
-                <br/>
+                 <br/>
                 <br/>
                 <input type="submit" value="Login"> 
             </form>
