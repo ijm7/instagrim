@@ -29,8 +29,9 @@
             </ul>
         </nav>
  
-        <article>
+        <div class="pictureformat">
             <h1>Your Pics</h1>
+            
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
@@ -44,12 +45,12 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
+        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><%
 
             }
             }
         %>
-        </article>
+        </div>
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>

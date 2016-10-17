@@ -105,8 +105,21 @@ input[type=password] {padding:5px; border:2px solid #ccc;
     border-radius: 5px;
     width:16em;
     font-size:1.8em;
+    
 }
+
 input[type=password]:focus {border-color:#333; }
+input[type=email]:focus {border-color:#333; }
+
+input[type=email] {padding:5px; border:2px solid #ccc; 
+-webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:16em;
+    font-size:1.8em;
+}
+
+
+
 
 input[type=submit] {padding:5px 15px; background:#ccc; border:0 none;
     cursor:pointer;
@@ -128,4 +141,10 @@ imasubmit
 .centerer
 {
     text-align:center;
+}
+
+.pictureformat
+{
+    margin-left:15%;
+    margin-right:15%;
 }
