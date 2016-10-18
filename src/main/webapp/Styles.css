@@ -45,6 +45,12 @@ h3 {
     font-family:"Arial",sans-serif;
 }
 
+h4{
+    font-size:3em;
+    text-align:left;
+    font-family:"Arial",sans-serif;
+}
+
 #para1 {
     font-size:2em;
     text-align:left;
@@ -144,6 +150,12 @@ imasubmit
 }
 
 .pictureformat
+{
+    margin-left:15%;
+    margin-right:15%;
+}
+
+.profilepage
 {
     margin-left:15%;
     margin-right:15%;

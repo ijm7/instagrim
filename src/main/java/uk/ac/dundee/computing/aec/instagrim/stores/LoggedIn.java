@@ -5,7 +5,7 @@
  */
 
 package uk.ac.dundee.computing.aec.instagrim.stores;
-
+import uk.ac.dundee.computing.aec.instagrim.models.User;
 /**
  *
  * @author Administrator
@@ -28,6 +28,11 @@ public class LoggedIn {
     }
     public void setLogedout(){
         logedin=false;
+    }
+    
+    public void getUserFirstName(String username)
+    {
+        
     }
     
     public void setLoginState(boolean logedin){

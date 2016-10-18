@@ -30,6 +30,8 @@ public class User {
     public boolean RegisterUser(String username, String Password, String email, String first_name, String last_name){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
+       //String[] emailconvert = new String[1];
+       //emailconvert[0]=email;
         try {
             EncodedPassword= sha1handler.SHA1(Password);
         }catch (UnsupportedEncodingException | NoSuchAlgorithmException et){
@@ -38,12 +40,14 @@ public class User {
         }
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email) Values(?,?,?,?,?)");
+        //PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name) Values(?,?,?,?)");
         //PreparedStatement ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
        
         BoundStatement boundStatement = new BoundStatement(ps);
         session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username,EncodedPassword,first_name,last_name,email));
+                        //username,EncodedPassword,first_name,last_name));
                         //username,EncodedPassword));
         //We are assuming this always works.  Also a transaction would be good here !
         
@@ -77,10 +81,29 @@ public class User {
                     return true;
             }
         }
-   
     
     return false;  
+    
     }
+    
+    public String getFirstName(String username)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select first_name from userprofiles where login =?");
+        BoundStatement boundStatement = new BoundStatement(ps);
+        ResultSet rs = null;
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        String StoredPass=null;
+        for (Row row : rs) {
+                StoredPass = row.getString("first_name");
+                
+        }
+       return StoredPass;
+        
+    }
+
        public void setCluster(Cluster cluster) {
         this.cluster = cluster;
     }

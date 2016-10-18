@@ -37,7 +37,16 @@
 
                 <br/>
                 <div class="centerer">
+                <input type="radio" name="filter" value="blackandwhite"> Black and White<br>
+                <input type="radio" name="filter" value="block">Block<br>    
+                    
                 <input class="imasubmit" type="submit" value="Press">
+                
+            </form>
+            <br>
+            <form action="">
+                <div class="centerer">
+                
                 </div>
             </form>
 
