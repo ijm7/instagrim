@@ -152,9 +152,8 @@ public class Image extends HttpServlet {
                 is.close();
             }
             RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
-             rd.forward(request, response);
+            rd.forward(request, response);
         }
-
     }
 
     private void error(String mess, HttpServletResponse response) throws ServletException, IOException {

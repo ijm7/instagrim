@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.instagrim.stores.ErrorCatch;
 
 /**
  *
@@ -63,14 +64,22 @@ public class Register extends HttpServlet {
         
         User us=new User();
         us.setCluster(cluster);
-        us.RegisterUser(username, password, email,first_name,last_name);
-        boolean isValid=us.IsValidUser(username, password);
+        
+        boolean space=us.IsAvailable(username, email);
         HttpSession session=request.getSession();
         System.out.println("Session in servlet "+session);
-        if (isValid){
+        if (space && username!="" && password!="" && email!="" && first_name!="" && last_name!=""){
             LoggedIn lg= new LoggedIn();
+            
+            us.RegisterUser(username, password, email,first_name,last_name);
+            
             lg.setLogedin();
             lg.setUsername(username);
+            
+            
+            lg.setUserFirstName(first_name);
+            lg.setUserLastName(last_name);
+            lg.setUserEmail(email);
             //request.setAttribute("LoggedIn", lg);
             
             session.setAttribute("LoggedIn", lg);
@@ -78,6 +87,14 @@ public class Register extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 	    rd.forward(request,response);
 	response.sendRedirect("/Instagrim");
+        }
+        else{
+            
+            ErrorCatch err = new ErrorCatch();
+            err.setLoginError(true);
+            session.setAttribute("ErrorCatch", err);
+            
+            response.sendRedirect("/Instagrim/register.jsp");
         }
         
     }

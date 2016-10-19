@@ -61,7 +61,10 @@
                     
         </nav>
     <div class="profilepage">
-        <h4>Your profile</h4>
+        <h4><%=lg.getUsername()%></h4>
+        <p><%=lg.getUserFirstName()%></p>
+        <p><%=lg.getUserLastName()%></p>
+        <p><%=lg.getUserEmail()%></p>
         
     </div>
     

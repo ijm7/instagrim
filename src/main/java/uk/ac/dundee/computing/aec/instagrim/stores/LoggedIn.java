@@ -13,6 +13,10 @@ import uk.ac.dundee.computing.aec.instagrim.models.User;
 public class LoggedIn {
     private boolean logedin=false;
     private String Username=null;
+    private String First_Name=null;
+    private String Last_Name=null;
+    private String Email=null;
+    private boolean logError=false;
     public void LogedIn(){
         
     }
@@ -30,9 +34,34 @@ public class LoggedIn {
         logedin=false;
     }
     
-    public void getUserFirstName(String username)
+    public void setUserFirstName(String firstname)
     {
-        
+        this.First_Name=firstname;
+    }
+    
+    public String getUserFirstName()
+    {
+        return First_Name;
+    }
+    
+    public void setUserLastName(String lastname)
+    {
+        this.Last_Name=lastname;
+    }
+    
+    public String getUserLastName()
+    {
+        return Last_Name;
+    }
+    
+    public void setUserEmail(String email)
+    {
+        this.Email=email;
+    }
+    
+    public String getUserEmail()
+    {
+        return Email;
     }
     
     public void setLoginState(boolean logedin){
@@ -41,4 +70,6 @@ public class LoggedIn {
     public boolean getlogedin(){
         return logedin;
     }
+    
+    
 }

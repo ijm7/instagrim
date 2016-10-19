@@ -50,6 +50,17 @@
                 
                 <br/>
                 <br/>
+                <%
+                        
+                        ErrorCatch err  = (ErrorCatch) session.getAttribute("ErrorCatch");
+                        if (err != null) {
+                            boolean error = err.getLoginError();
+                            if (err.getLoginError()) {
+                    %>
+                    <p class="loggtext" style="color:red;">Error: Username or password has been incorrectly entered</p>
+                        <%}}else{%>
+                        <br><%}%>
+                <br/>
                 <br/>
                  <br/>
                 <br/>

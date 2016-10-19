@@ -3,7 +3,7 @@
     Created on : Sep 28, 2014, 6:29:51 PM
     Author     : Administrator
 --%>
-
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
+      
+       
     </head>
     <body>
         <header>
@@ -50,11 +52,23 @@
         
                 <br/>
                 <br/>
-                <br/>
-                <br/>
+                
+                
+               <%
+                        
+                        ErrorCatch err  = (ErrorCatch) session.getAttribute("ErrorCatch");
+                        if (err != null) {
+                            boolean error = err.getLoginError();
+                            if (err.getLoginError()) {
+                    %>
+                    <p class="loggtext" style="color:red;">Error: This username may have already been taken, or your email address has been registered already</p>
+                        <%}}else{%>
+                        <br/><%}%>
                 <br/>
                 <input type="submit" value="Register"> 
         </form>
+        <br>
+       
     </logg>
         <footer>
             <ul>

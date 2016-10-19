@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.ErrorCatch;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
 /**
@@ -68,6 +69,13 @@ public class Login extends HttpServlet {
             LoggedIn lg= new LoggedIn();
             lg.setLogedin();
             lg.setUsername(username);
+            String firstName = us.getFirstName(username);
+            String lastName = us.getLastName(username);
+            String email = us.getEmail(username);
+            
+            lg.setUserFirstName(firstName);
+            lg.setUserLastName(lastName);
+            lg.setUserEmail(email);
             //request.setAttribute("LoggedIn", lg);
             
             session.setAttribute("LoggedIn", lg);
@@ -76,6 +84,9 @@ public class Login extends HttpServlet {
 	    rd.forward(request,response);
             
         }else{
+            ErrorCatch err = new ErrorCatch();
+            err.setLoginError(true);
+            session.setAttribute("ErrorCatch", err);
             response.sendRedirect("/Instagrim/login.jsp");
         }
         

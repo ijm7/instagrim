@@ -25,7 +25,7 @@ public class Index extends HttpServlet {
     {
         
        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
+       rd.forward(request, response);
         
     }
     

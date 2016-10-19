@@ -14,6 +14,7 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 
@@ -66,6 +67,7 @@ public class User {
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select password from userprofiles where login =?");
         ResultSet rs = null;
+        
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
@@ -77,13 +79,37 @@ public class User {
             for (Row row : rs) {
                
                 String StoredPass = row.getString("password");
+                
                 if (StoredPass.compareTo(EncodedPassword) == 0)
+                {
                     return true;
+                }
+                
             }
         }
-    
     return false;  
+    }
     
+    public boolean IsAvailable(String username, String email){
+        
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login,email from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        
+            for (Row row : rs) {
+                String UserCheck = row.getString("login");
+                String EmailCheck = row.getString("email");
+                if (UserCheck.compareTo(username)==0 && EmailCheck.compareTo(email)==0)
+                {
+                    return true;
+                } 
+            }
+        
+    return false;  
     }
     
     public String getFirstName(String username)
@@ -98,6 +124,41 @@ public class User {
         String StoredPass=null;
         for (Row row : rs) {
                 StoredPass = row.getString("first_name");
+                
+        }
+       return StoredPass;   
+    }
+    
+    public String getLastName(String username)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select last_name from userprofiles where login =?");
+        BoundStatement boundStatement = new BoundStatement(ps);
+        ResultSet rs = null;
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        String StoredPass=null;
+        for (Row row : rs) {
+                StoredPass = row.getString("last_name");
+                
+        }
+       return StoredPass;
+        
+    }
+    
+    public String getEmail(String username)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select email from userprofiles where login =?");
+        BoundStatement boundStatement = new BoundStatement(ps);
+        ResultSet rs = null;
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        String StoredPass=null;
+        for (Row row : rs) {
+                StoredPass = row.getString("email");
                 
         }
        return StoredPass;
