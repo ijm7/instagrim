@@ -35,9 +35,11 @@
                 <%if (!url.equals("/Instagrim/Images/majed")) {
                     %>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <li><a href="/Instagrim/Logout">Logout</a></li>
                 <%}else{%>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                 </ul>
+                <li><a href="/Instagrim/Logout">Logout</a></li>
                 <%}}else{%>
                 <ul class="navbar">
                 <li><a href="/Instagrim">Home</a></li>

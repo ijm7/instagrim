@@ -67,9 +67,11 @@
                     
         </nav>
     <homebody>
-                    <br>
-                    <br>
-                    <br>
+        <div class="centerer">
+        <img src="autumn.jpg" alt="autumn">
+        </div>
+                    
+                    
                     <%
                         if (lg != null) {
                             String UserName = lg.getUsername();
