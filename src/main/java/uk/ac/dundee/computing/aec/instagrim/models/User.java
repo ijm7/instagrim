@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import java.math.BigInteger;
 
 /**
  *
@@ -92,25 +93,72 @@ public class User {
     
     public boolean IsAvailable(String username, String email){
         
-        Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select login,email from userprofiles where login =?");
+        /*Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select from userprofiles where email =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        username));
+                        email));*/
         
-            for (Row row : rs) {
-                String UserCheck = row.getString("login");
+        /*PreparedStatement ps = session.prepare("select login,email from userprofiles");
+        ResultSet rs = null;
+        rs = session.exec*/
+        
+            //for (Row row : rs) {
+                /*String UserCheck = row.getString("login");
                 String EmailCheck = row.getString("email");
                 if (UserCheck.compareTo(username)==0 && EmailCheck.compareTo(email)==0)
                 {
                     return true;
-                } 
-            }
+                } */
+                
+                int number=0;
+                Session session = cluster.connect("instagrim");
+                PreparedStatement ps = session.prepare("select COUNT(*) from userprofiles where login =?");
+                ResultSet rs = null;
+                BoundStatement boundStatement = new BoundStatement(ps);
+                rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+                for (Row row : rs) {
+                long StoredPass = row.getLong("count");
+                if (StoredPass == 0)
+                    {
+                        number++;
+                    }
+                }
+                
+                PreparedStatement ps2 = session.prepare("select COUNT(*) from userprofiles where email =? ALLOW FILTERING");
+                ResultSet rs2 = null;
+                BoundStatement boundStatement2 = new BoundStatement(ps2);
+                rs2 = session.execute( // this is where the query is executed
+                boundStatement2.bind( // here you are binding the 'boundStatement'
+                        email));
+                for (Row row2 : rs2) {
+                long StoredPass2 = row2.getLong("count");
+                if (StoredPass2 == 0)
+                    {
+                        number++;
+                    }
+                }
+                if (number==2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            
+                
+           
         
-    return false;  
+
     }
+    
+   
     
     public String getFirstName(String username)
     {

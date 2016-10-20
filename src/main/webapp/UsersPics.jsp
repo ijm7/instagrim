@@ -7,6 +7,7 @@
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,29 +21,54 @@
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
         </header>
-        
+        <%
+                        String url=request.getAttribute("javax.servlet.forward.request_uri").toString();
+                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
+                        
         <nav>
+            <%if (lg != null) {
+                            String UserName = lg.getUsername();%>
             <ul class="navbar">
                 <li><a href="/Instagrim">Home</a></li>
                 <li><a href="/Instagrim/Upload">Upload</a></li>
+                <li><a href="/Instagrim/Profile">Your Profile</a></li>
+                <%if (!url.equals("/Instagrim/Images/majed")) {
+                    %>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
+                <%}else{%>
+                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                </ul>
+                <%}}else{%>
+                <ul class="navbar">
+                <li><a href="/Instagrim">Home</a></li>
+                <li><a href="/Instagrim/Register">Register</a></li>
+                <li><a href="/Instagrim/Login">Login</a></li><%}%>
+                
+            
         </nav>
  
         <div class="pictureformat">
+            
+                            <%if (!url.equals("/Instagrim/Images/majed")) {
+                    %>
             <h1>Your Pics</h1>
+            <%}else{%>
+            
+            <h1>Sample Pics</h1>
+            <%}%>
             <table>
   
                 <tr>
                     
     <th>Image</th>
+     <th>Picture Information</th>
     <th>Options</th>
     </tr>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
         %>
-        <p>No Pictures found</p>
+        <p class="loggtext">No Pictures found</p>
         <%
         } else {
             Iterator<Pic> iterator;
@@ -53,7 +79,7 @@
         %>
         <tr>
         
-            <td style="width:50%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td><td>cheese</td></tr><%
+            <td style="width:35%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td><td></td><td style="width:25%;">cheese</td></tr><%
 
             }
             }

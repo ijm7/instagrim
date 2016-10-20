@@ -68,14 +68,22 @@ public class Register extends HttpServlet {
         boolean space=us.IsAvailable(username, email);
         HttpSession session=request.getSession();
         System.out.println("Session in servlet "+session);
-        if (space && username!="" && password!="" && email!="" && first_name!="" && last_name!=""){
-            LoggedIn lg= new LoggedIn();
+        if (space){
+            
             
             us.RegisterUser(username, password, email,first_name,last_name);
-            
+            LoggedIn lg= new LoggedIn();
+            System.out.println("yes");
             lg.setLogedin();
             lg.setUsername(username);
-            
+            /*if (username.equals("majed"))
+            {
+                lg.setAdmin(true);
+            }
+            else
+            {
+                lg.setAdmin(false);
+            }*/
             
             lg.setUserFirstName(first_name);
             lg.setUserLastName(last_name);
@@ -89,7 +97,7 @@ public class Register extends HttpServlet {
 	response.sendRedirect("/Instagrim");
         }
         else{
-            
+            System.out.println("no");
             ErrorCatch err = new ErrorCatch();
             err.setLoginError(true);
             session.setAttribute("ErrorCatch", err);

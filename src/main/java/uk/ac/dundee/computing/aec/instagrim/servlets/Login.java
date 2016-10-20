@@ -69,6 +69,14 @@ public class Login extends HttpServlet {
             LoggedIn lg= new LoggedIn();
             lg.setLogedin();
             lg.setUsername(username);
+            /*if (username=="majed")
+            {
+               lg.setAdmin(true);
+            }
+            else
+            {
+                 lg.setAdmin(false);
+            }*/
             String firstName = us.getFirstName(username);
             String lastName = us.getLastName(username);
             String email = us.getEmail(username);

@@ -17,6 +17,7 @@ public class LoggedIn {
     private String Last_Name=null;
     private String Email=null;
     private boolean logError=false;
+    private boolean admin=false;
     public void LogedIn(){
         
     }
@@ -69,6 +70,16 @@ public class LoggedIn {
     }
     public boolean getlogedin(){
         return logedin;
+    }
+    
+    public void setAdmin(boolean admin)
+    {
+        this.admin=admin;
+    }
+    
+    public boolean getAdmin()
+    {
+        return admin;
     }
     
     

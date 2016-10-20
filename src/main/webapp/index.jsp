@@ -34,9 +34,10 @@
             <ul class="navbar">
                 <li><a href="/Instagrim/Upload">Upload</a></li>
                     
-
+                <li><a href="/Instagrim/Profile">Your Profile</a></li>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                <li><a href="profile.jsp">Your Profile</a></li>
+                
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                 <li><a href="/Instagrim/Logout">Logout</a></li>
                
                     
@@ -54,6 +55,7 @@
             
                 <li><a href="/Instagrim/Register">Register</a></li>
                 <li><a href="/Instagrim/Login">Login</a></li>
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                     <%}
                     %>
                 

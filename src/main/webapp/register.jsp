@@ -43,11 +43,11 @@
         <form method="POST"  action="Register">
             <br>
         
-        <p class="loggtext">User Name</p><input type="text" name="username">
-        <p class="loggtext">Password</p><input type="password" name="password">
-        <p class="loggtext">First Name</p><input type="text" name="first_name">
-        <p class="loggtext">Last Name</p><input type="text" name="last_name">
-        <p class="loggtext">Email Address</p><input type="email" name="email">
+        <p class="loggtext">User Name</p><input type="text" name="username" required>
+        <p class="loggtext">Password</p><input type="password" name="password" required>
+        <p class="loggtext">First Name</p><input type="text" name="first_name" required>
+        <p class="loggtext">Last Name</p><input type="text" name="last_name" required>
+        <p class="loggtext">Email Address</p><input type="email" name="email" required>
         
         
                 <br/>

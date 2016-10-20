@@ -50,7 +50,7 @@ public class PicModel {
         this.cluster = cluster;
     }
 
-    public void insertPic(byte[] b, String type, String name, String user) {
+    public void insertPic(byte[] b, String type, String name, String user, int filter) {
         try {
             Convertors convertor = new Convertors();
 
@@ -64,10 +64,10 @@ public class PicModel {
             FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
 
             output.write(b);
-            byte []  thumbb = picresize(picid.toString(),types[1]);
+            byte []  thumbb = picresize(picid.toString(),types[1], filter);
             int thumblength= thumbb.length;
             ByteBuffer thumbbuf=ByteBuffer.wrap(thumbb);
-            byte[] processedb = picdecolour(picid.toString(),types[1]);
+            byte[] processedb = picdecolour(picid.toString(),types[1], filter);
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
             Session session = cluster.connect("instagrim");
@@ -87,10 +87,10 @@ public class PicModel {
         }
     }
 
-    public byte[] picresize(String picid,String type) {
+    public byte[] picresize(String picid,String type, int filter) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
-            BufferedImage thumbnail = createThumbnail(BI);
+            BufferedImage thumbnail = createThumbnail(BI, filter);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(thumbnail, type, baos);
             baos.flush();
@@ -104,10 +104,10 @@ public class PicModel {
         return null;
     }
     
-    public byte[] picdecolour(String picid,String type) {
+    public byte[] picdecolour(String picid,String type, int filter) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
-            BufferedImage processed = createProcessed(BI);
+            BufferedImage processed = createProcessed(BI, filter);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(processed, type, baos);
             baos.flush();
@@ -120,15 +120,47 @@ public class PicModel {
         return null;
     }
 
-    public static BufferedImage createThumbnail(BufferedImage img) {
-        img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
+    public static BufferedImage createThumbnail(BufferedImage img, int filter) {
+        if (filter==1)
+        {//grey
+            img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
+        }
+        else if (filter==2)
+        {//brighter
+            img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_BRIGHTER, OP_BRIGHTER,OP_BRIGHTER, OP_BRIGHTER, OP_BRIGHTER, OP_BRIGHTER);
+        }
+        else if (filter==3)
+        {
+            img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_DARKER, OP_DARKER,OP_DARKER,OP_DARKER,OP_DARKER,OP_DARKER);
+        }
+        else
+        {//normal
+            img = resize(img, Method.SPEED, 250, OP_ANTIALIAS);
+        }
+        
         // Let's add a little border before we return result.
         return pad(img, 2);
     }
     
-   public static BufferedImage createProcessed(BufferedImage img) {
+   public static BufferedImage createProcessed(BufferedImage img, int filter) {
         int Width=img.getWidth()-1;
-        img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
+        if (filter==1)
+        {
+            img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
+        }
+        else if (filter==2)
+        {
+            img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_BRIGHTER,  OP_BRIGHTER,OP_BRIGHTER, OP_BRIGHTER, OP_BRIGHTER, OP_BRIGHTER);
+        }
+        else if (filter==3)
+        {
+            img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_DARKER,  OP_DARKER,OP_DARKER, OP_DARKER, OP_DARKER, OP_DARKER);
+        }
+        else
+        {
+            img = resize(img, Method.SPEED, Width, OP_ANTIALIAS);
+        }
+        //OP_GRAYSCALE
         return pad(img, 4);
     }
    
@@ -154,13 +186,15 @@ public class PicModel {
 
             }
         }
-        return Pics;
+    return Pics;
     }
 
     public Pic getPic(int image_type, java.util.UUID picid) {
         Session session = cluster.connect("instagrim");
         ByteBuffer bImage = null;
         String type = null;
+        //String name = null;
+        
         int length = 0;
         try {
             Convertors convertor = new Convertors();
@@ -198,6 +232,8 @@ public class PicModel {
                     }
                     
                     type = row.getString("type");
+                    //name = row.getString("name");
+                    
 
                 }
             }
@@ -207,8 +243,8 @@ public class PicModel {
         }
         session.close();
         Pic p = new Pic();
+        //p.setPic(bImage, length, type, name);
         p.setPic(bImage, length, type);
-
         return p;
 
     }

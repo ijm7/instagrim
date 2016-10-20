@@ -24,7 +24,8 @@
                 <%
                     LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                 %>
-                <li><a href="/Instagrim/Upload">Upload</a></li>
+                
+                <li><a href="/Instagrim/Profile">Your Profile</a></li>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
             </ul>
@@ -35,14 +36,27 @@
             <form method="POST" enctype="multipart/form-data" action="Image">
                 <p class="loggtext">File to upload: <input type="file" name="upfile"></p><br/>
 
-                <br/>
-                <div class="centerer">
-                <input type="radio" name="filter" value="blackandwhite"> Black and White<br>
-                <input type="radio" name="filter" value="block">Block<br>    
-                    
-                <input class="imasubmit" type="submit" value="Press">
                 
+            <div class="filterformat">    
+                    <table style="width:20%;"><tr>
+                    
+                    <th style="width:20%;">✓</th>
+                    <th>Filter</th>
+                    
+                    </tr>
+                    <tr><td><input type="radio" name="filter" value="blackandwhite"></td><td><p>Black and White</p></td></tr>
+                    <tr><td><input type="radio" name="filter" value="brighter"></td><td><p>Bright</p></td></tr>
+                    <tr><td><input type="radio" name="filter" value="darker"></td><td><p>Dark</p></td></tr>
+                    </table>
+            </div>
+                    <br>
+                    <br>
+                    
+                <div class="centerer">    
+                <input class="imasubmit" type="submit" value="Press">
+                </div>
             </form>
+            <br>
             <br>
             <form action="">
                 <div class="centerer">

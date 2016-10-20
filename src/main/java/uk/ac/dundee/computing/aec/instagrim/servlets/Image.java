@@ -128,7 +128,24 @@ public class Image extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         for (Part part : request.getParts()) {
             System.out.println("Part Name " + part.getName());
-
+            String imageFilter=request.getParameter("filter");
+            int filterNumber;
+            if ("blackandwhite".equals(imageFilter))
+            {
+                filterNumber=1;
+            }
+            else if ("brighter".equals(imageFilter))
+            {
+                filterNumber=2;
+            }
+            else if ("darker".equals(imageFilter))
+            {
+                filterNumber=3;
+            }
+            else
+            {
+                filterNumber=0;
+            }
             String type = part.getContentType();
             String filename = part.getSubmittedFileName();
             
@@ -147,7 +164,7 @@ public class Image extends HttpServlet {
                 System.out.println("Length : " + b.length);
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
-                tm.insertPic(b, type, filename, username);
+                tm.insertPic(b, type, filename, username, filterNumber);
 
                 is.close();
             }
