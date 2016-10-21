@@ -193,21 +193,22 @@ public class PicModel {
         Session session = cluster.connect("instagrim");
         ByteBuffer bImage = null;
         String type = null;
-        //String name = null;
-        
+        String name = null;
+        Date date=null;
         int length = 0;
         try {
             Convertors convertor = new Convertors();
             ResultSet rs = null;
             PreparedStatement ps = null;
+            
          
             if (image_type == Convertors.DISPLAY_IMAGE) {
                 
-                ps = session.prepare("select image,imagelength,type from pics where picid =?");
+                ps = session.prepare("select image,imagelength,interaction_time,type,name from pics where picid =?");
             } else if (image_type == Convertors.DISPLAY_THUMB) {
-                ps = session.prepare("select thumb,imagelength,thumblength,type from pics where picid =?");
+                ps = session.prepare("select thumb,imagelength,thumblength,interaction_time,type,name from pics where picid =?");
             } else if (image_type == Convertors.DISPLAY_PROCESSED) {
-                ps = session.prepare("select processed,processedlength,type from pics where picid =?");
+                ps = session.prepare("select processed,processedlength, interaction_time,type,name from pics where picid =?");
             }
             BoundStatement boundStatement = new BoundStatement(ps);
             rs = session.execute( // this is where the query is executed
@@ -222,17 +223,19 @@ public class PicModel {
                     if (image_type == Convertors.DISPLAY_IMAGE) {
                         bImage = row.getBytes("image");
                         length = row.getInt("imagelength");
+                        //date = row.getTimestamp("interaction_time");
                     } else if (image_type == Convertors.DISPLAY_THUMB) {
                         bImage = row.getBytes("thumb");
                         length = row.getInt("thumblength");
-                
+                        //date = row.getTimestamp("interaction_time");
                     } else if (image_type == Convertors.DISPLAY_PROCESSED) {
                         bImage = row.getBytes("processed");
                         length = row.getInt("processedlength");
+                        //date = row.getTimestamp("interaction_time");
                     }
-                    
+                    date = row.getTimestamp("interaction_time");
                     type = row.getString("type");
-                    //name = row.getString("name");
+                    name = row.getString("name");
                     
 
                 }
@@ -243,8 +246,8 @@ public class PicModel {
         }
         session.close();
         Pic p = new Pic();
-        //p.setPic(bImage, length, type, name);
-        p.setPic(bImage, length, type);
+        p.setPic(bImage, length, date, type, name);
+        //p.setPic(bImage, length, type);
         return p;
 
     }

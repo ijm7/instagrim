@@ -8,7 +8,8 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
 import com.datastax.driver.core.utils.Bytes;
 import java.nio.ByteBuffer;
 import java.util.Date;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Administrator
@@ -39,18 +40,30 @@ public class Pic {
         
     }
     
-    /*public void setPic(ByteBuffer bImage, int length,String type, String name) {
+    public void setPic(ByteBuffer bImage, int length,Date date, String type, String name) {
         this.bImage = bImage;
         this.length = length;
         this.type=type;
         this.name=name;
-    }*/
+    }
     
     public void setDate(Date date)
     {
         this.date=date;
     }
-
+    
+    public Date getDate()
+    {
+        return date;
+    }
+    
+    public String getTextDate()
+    {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        String textDate = df.format(date);
+        return textDate;
+    }
+    
     public ByteBuffer getBuffer() {
         return bImage;
     }
@@ -68,10 +81,12 @@ public class Pic {
         return name;
     }
     
-    public Date getDate()
+    public void setName(String name)
     {
-        return date;
+        this.name=name;
     }
+    
+    
 
     public byte[] getBytes() {
          

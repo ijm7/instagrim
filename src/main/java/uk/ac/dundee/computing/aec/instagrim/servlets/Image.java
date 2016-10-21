@@ -105,6 +105,11 @@ public class Image extends HttpServlet {
         rd.forward(request, response);
 
     }
+    
+    private void DeleteImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+
+    }
 
     private void DisplayImage(int type,String Image, HttpServletResponse response) throws ServletException, IOException {
         PicModel tm = new PicModel();
