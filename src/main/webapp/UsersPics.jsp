@@ -36,10 +36,12 @@
                     %>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                 <li><a href="/Instagrim/Logout">Logout</a></li>
+                </ul>
                 <%}else{%>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                </ul>
                 <li><a href="/Instagrim/Logout">Logout</a></li>
+                </ul>
+                
                 <%}}else{%>
                 <ul class="navbar">
                 <li><a href="/Instagrim">Home</a></li>

@@ -29,10 +29,12 @@
                     %>
             
             <ul class="navbar">
+                <li><a href="/Instagrim">Home</a></li>
                 <li><a href="/Instagrim/Upload">Upload</a></li>
                     
-
+                
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                 <li><a href="/Instagrim/Logout">Logout</a></li>
                
                     

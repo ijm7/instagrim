@@ -79,7 +79,7 @@
                     %>
                     <h3>Welcome, <%=lg.getUsername()%>!</h3>
                                 
-                    <p id="para1">Click <a href="/Instagrim/Images/<%=lg.getUsername()%>">here</a> to go to your images</p>
+                    <p id="para1" style="text-align:center;">Click <a href="/Instagrim/Images/<%=lg.getUsername()%>">here</a> to go to your images</p>
                     <%}
                             }else{
                                 %>

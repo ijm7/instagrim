@@ -10,7 +10,21 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
  * @author iainmorton
  */
 public class UploadSuccess {
+    
+    private boolean uploadComplete=false;
     public void UploadSuccess() {
 
     }
+    
+    public void setUploadSuccess(boolean upload)
+    {
+        this.uploadComplete=upload;
+    }
+    
+    public boolean getUploadSuccess()
+    {
+        return uploadComplete;
+    }
+    
+    
 }

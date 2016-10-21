@@ -21,7 +21,9 @@
         <p class="loggtext">Redirecting...</p>
         <br>
         <br>
+        <div class="centerer"><img src="Clock.gif" alt="clock" style="width:75px; height:75px;"></div>
         <br>
-        <p><a href="/Instagrim">Click here if redirecting is not successful</a></p>
+        <br>
+        <p style="text-align:center;"><a href="/Instagrim">Click here if redirecting is not successful</a></p>
     </body>
 </html>

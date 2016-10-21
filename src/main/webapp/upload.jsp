@@ -24,10 +24,11 @@
                 <%
                     LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                 %>
-                
+                <li><a href="/Instagrim">Home</a></li>
                 <li><a href="/Instagrim/Profile">Your Profile</a></li>
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                
             </ul>
         </nav>
  
@@ -56,6 +57,16 @@
                 <input class="imasubmit" type="submit" value="Press">
                 </div>
             </form>
+            <%
+                        
+                        UploadSuccess upload  = (UploadSuccess) session.getAttribute("UploadSuccess");
+                        if (upload != null) {
+                            
+                            if (upload.getUploadSuccess()) {
+                                upload.setUploadSuccess(false);
+                    %>
+                    <p class="loggtext" style="color:green;">Upload successful!</p>
+                    <%}}%>
             <br>
             <br>
             <form action="">

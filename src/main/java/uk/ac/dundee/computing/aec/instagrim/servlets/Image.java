@@ -25,8 +25,10 @@ import org.apache.commons.fileupload.util.Streams;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrim.stores.ErrorCatch;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrim.stores.UploadSuccess;
 
 /**
  * Servlet implementation class Image
@@ -168,6 +170,9 @@ public class Image extends HttpServlet {
 
                 is.close();
             }
+            UploadSuccess upload = new UploadSuccess();
+            upload.setUploadSuccess(true);
+            session.setAttribute("UploadSuccess", upload);
             RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
             rd.forward(request, response);
         }

@@ -60,6 +60,7 @@
                         if (err != null) {
                             boolean error = err.getLoginError();
                             if (err.getLoginError()) {
+                                err.setLoginError(false);
                     %>
                     <p class="loggtext" style="color:red;">Error: This username may have already been taken, or your email address has been registered already</p>
                         <%}}else{%>

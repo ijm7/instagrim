@@ -56,6 +56,7 @@
                         if (err != null) {
                             boolean error = err.getLoginError();
                             if (err.getLoginError()) {
+                                err.setLoginError(false);
                     %>
                     <p class="loggtext" style="color:red;">Error: Username or password has been incorrectly entered</p>
                         <%}}else{%>
