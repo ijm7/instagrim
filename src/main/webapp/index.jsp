@@ -58,17 +58,14 @@
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                     <%}
                     %>
-                
-                
-                
             </ul>
-                    
-                    
-                    
         </nav>
     <homebody>
         <div class="centerer">
-        <img src="autumn.jpg" alt="autumn">
+           
+        <img style="width:100%;height:auto;"src="landscape.jpg" alt="landscape">
+        <br>
+        <br>
         </div>
                     
                     
@@ -79,13 +76,13 @@
                     %>
                     <h3>Welcome, <%=lg.getUsername()%>!</h3>
                                 
-                    <p id="para1" style="text-align:center;">Click <a href="/Instagrim/Images/<%=lg.getUsername()%>">here</a> to go to your images</p>
+                    <p id="para1" style="text-align:center; ">Click <a href="/Instagrim/Images/<%=lg.getUsername()%>">here</a> to go to your images</p>
                     <%}
                             }else{
                                 %>
                                 <h3>What is instagrim?</h3>
                     
-                    <p id="para1">Instagrim is a website that allows you to store pictures and modify them.</p>
+                    <p id="para1" style="text-align:center;">Instagrim allows you to store pictures with image filters applied to them!</p>
                     <%
                            
                     }%>

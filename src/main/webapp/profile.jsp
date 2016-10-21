@@ -62,11 +62,22 @@
                     
                     
         </nav>
-    <div class="profilepage">
-        <h4><%=lg.getUsername()%></h4>
-        <p><%=lg.getUserFirstName()%></p>
-        <p><%=lg.getUserLastName()%></p>
-        <p><%=lg.getUserEmail()%></p>
+                    <br>
+                    <br>
+                    <br>
+    <div class="pictureformat">
+        <table style="width:35;"><tr>
+                    
+                <th colspan="2">Your Details</th>
+                    
+                    
+                    </tr>
+                    <tr><td><b>Username</b></td><td><p><%=lg.getUsername()%></p></td></tr>
+                    <tr><td><b>First Name</b></td><td><p><%=lg.getUserFirstName()%></p></td></tr>
+                    <tr><td><b>Last Name</b></td><td><p><%=lg.getUserLastName()%></p></td></tr>
+                    <tr><td><b>Email</b></td><td><p><%=lg.getUserEmail()%></p></td></tr>
+                    </table>
+        
         
     </div>
     

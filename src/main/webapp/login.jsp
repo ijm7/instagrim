@@ -47,7 +47,11 @@
                 <p class="loggtext">Password</p> <input type="password" name="password">
                 
                 
-                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <input type="submit" value="Login"> 
                 <br/>
                 <br/>
                 <%
@@ -61,18 +65,14 @@
                     <p class="loggtext" style="color:red;">Error: Username or password has been incorrectly entered</p>
                         <%}}else{%>
                         <br/><%}%>
-                <br/>
-                <br/>
-                 <br/>
-                <br/>
-                <input type="submit" value="Login"> 
+                
+                 
+                
             </form>
 
         </logg>
         <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
+            
         </footer>
     </body>
 </html>
