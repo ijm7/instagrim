@@ -37,7 +37,7 @@
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                 <li><a href="/Instagrim/Logout">Logout</a></li>
                 </ul>
-                <%}else{%>
+                <%}else{%> 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                 <li><a href="/Instagrim/Logout">Logout</a></li>
                 </ul>
@@ -79,11 +79,15 @@
             iterator = lsPics.iterator();
             while (iterator.hasNext()) {
                 Pic p = (Pic) iterator.next();
+               
 
         %>
         <tr>
         
-            <td style="width:20%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td><td><%=p.getName()%></td><td style="width:25%;">cheese</td></tr><%
+            <td style="width:20%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td>
+            <td><p class="loggtext">Date and Time of upload: <%=p.getTextDate()%></p></td>
+            <td style="width:25%;"><form method="POST" action="Image"><input type="submit" value="Delete Image"></form>
+            <br></td></tr><%
 
             }
             }
