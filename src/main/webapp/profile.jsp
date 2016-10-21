@@ -76,6 +76,7 @@
                     <tr><td><b>First Name</b></td><td><p><%=lg.getUserFirstName()%></p></td></tr>
                     <tr><td><b>Last Name</b></td><td><p><%=lg.getUserLastName()%></p></td></tr>
                     <tr><td><b>Email</b></td><td><p><%=lg.getUserEmail()%></p></td></tr>
+                    <tr><td><b>Image Count</b></td><td><p><%=lg.getImageCount()%></p></td></tr>
                     </table>
         
         

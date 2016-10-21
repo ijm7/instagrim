@@ -83,7 +83,7 @@
         %>
         <tr>
         
-            <td style="width:20%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td><td></td><td style="width:25%;">cheese</td></tr><%
+            <td style="width:20%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td><td><%=p.getName()%></td><td style="width:25%;">cheese</td></tr><%
 
             }
             }

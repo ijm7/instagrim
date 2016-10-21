@@ -18,6 +18,7 @@ public class LoggedIn {
     private String Email=null;
     private boolean logError=false;
     private boolean admin=false;
+    private String count=null;
     public void LogedIn(){
         
     }
@@ -82,5 +83,14 @@ public class LoggedIn {
         return admin;
     }
     
+    public String getImageCount()
+    {
+        return count;
+    }
+    
+    public void setImageCount(String count)
+    {
+        this.count=count;
+    }
     
 }

@@ -88,6 +88,7 @@ public class Register extends HttpServlet {
             lg.setUserFirstName(first_name);
             lg.setUserLastName(last_name);
             lg.setUserEmail(email);
+            lg.setImageCount(us.getImageAmount());
             //request.setAttribute("LoggedIn", lg);
             
             session.setAttribute("LoggedIn", lg);

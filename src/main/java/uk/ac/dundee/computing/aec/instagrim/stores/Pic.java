@@ -23,6 +23,7 @@ public class Pic {
     private String name;
     private Date date;
     
+    
     public void Pic() {
 
     }
@@ -33,16 +34,17 @@ public class Pic {
         return UUID.toString();
     }
     
-    public void setPic(ByteBuffer bImage, int length,String type) {
+    /*public void setPic(ByteBuffer bImage, int length,String type) {
         this.bImage = bImage;
         this.length = length;
         this.type=type;
         
-    }
+    }*/
     
     public void setPic(ByteBuffer bImage, int length,Date date, String type, String name) {
         this.bImage = bImage;
         this.length = length;
+        this.date=date;
         this.type=type;
         this.name=name;
     }
@@ -85,6 +87,8 @@ public class Pic {
     {
         this.name=name;
     }
+    
+    
     
     
 

@@ -177,6 +177,25 @@ public class User {
        return StoredPass;   
     }
     
+    public String getImageAmount()
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select COUNT(*) from userpiclist");
+        BoundStatement boundStatement = new BoundStatement(ps);
+        ResultSet rs = null;
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        ));
+        long StoredPass=0;
+        for (Row row : rs) {
+            StoredPass = row.getLong("count");
+                
+                
+        }
+        String passer=Long.toString(StoredPass);
+       return passer;   
+    }
+    
     public String getLastName(String username)
     {
         Session session = cluster.connect("instagrim");
