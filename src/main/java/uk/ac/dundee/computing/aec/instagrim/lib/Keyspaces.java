@@ -29,7 +29,7 @@ public final class Keyspaces {
                     + " type  varchar,"
                     + " name  varchar,"
                     + " PRIMARY KEY (picid)"
-                    + ") ";
+                    + ") ;";
             String Createuserpiclist = "CREATE TABLE if not exists instagrim.userpiclist (\n"
                     + "picid uuid,\n"
                     + "user varchar,\n"

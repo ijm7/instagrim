@@ -88,6 +88,12 @@ public class LoggedIn {
         return count;
     }
     
+    public void addImageCount()
+    {
+        int a = Integer.parseInt(count);
+        int b = a + 1;
+        count = Integer.toString(b);
+    }
     public void setImageCount(String count)
     {
         this.count=count;

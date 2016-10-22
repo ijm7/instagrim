@@ -181,6 +181,10 @@ public class Image extends HttpServlet {
             UploadSuccess upload = new UploadSuccess();
             upload.setUploadSuccess(true);
             session.setAttribute("UploadSuccess", upload);
+            lg.addImageCount();
+            //request.setAttribute("LoggedIn", lg);
+            
+            session.setAttribute("LoggedIn", lg);
             RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
             rd.forward(request, response);
         }

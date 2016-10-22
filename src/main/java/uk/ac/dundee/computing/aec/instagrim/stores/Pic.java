@@ -22,6 +22,7 @@ public class Pic {
     private java.util.UUID UUID=null;
     private String name;
     private Date date;
+    private String user;
     
     
     public void Pic() {
@@ -86,6 +87,16 @@ public class Pic {
     public void setName(String name)
     {
         this.name=name;
+    }
+    
+    public String getUser()
+    {
+        return user;
+    }
+    
+    public void setUser(String user)
+    {
+        this.user=user;
     }
     
     

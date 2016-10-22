@@ -69,6 +69,7 @@
     <th>Options</th>
     </tr>
         <%
+            int counter=0;
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
         %>
@@ -79,14 +80,19 @@
             iterator = lsPics.iterator();
             while (iterator.hasNext()) {
                 Pic p = (Pic) iterator.next();
-               
+              counter++;
 
         %>
         <tr>
         
             <td style="width:20%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td>
-            <td><p class="loggtext">Date and Time of upload: <%=p.getTextDate()%></p></td>
-            <td style="width:25%;"><form method="POST" action="Image"><input type="submit" value="Delete Image"></form>
+            <td><p class="loggtext">Date and Time of upload: <%=p.getDate().toString()%> <%=p.getSUUID()%> <%=p.getUser()%></p></td>
+            <td style="width:25%;"><form method="GET" enctype="multipart/form-data" action="DeleteImage">
+                    <input type="hidden" name="picid" value="<%=p.getSUUID().toString()%>">
+                    <input type="hidden" name="picuser" value="<%=p.getUser()%>">
+                    <input type="hidden" name="picadded" value="<%=p.getDate().toString()%>">
+                    <input type="submit" value="Delete"></form>
+                    
             <br></td></tr><%
 
             }

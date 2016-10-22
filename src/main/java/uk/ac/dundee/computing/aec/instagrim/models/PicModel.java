@@ -167,8 +167,8 @@ public class PicModel {
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
-        //PreparedStatement ps = session.prepare("select picid,pic_added from userpiclist where user =?");
-        PreparedStatement ps = session.prepare("select picid,interaction_time from pics where user =? ALLOW FILTERING");
+        PreparedStatement ps = session.prepare("select picid,pic_added from userpiclist where user =?");
+        
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -181,10 +181,11 @@ public class PicModel {
             for (Row row : rs) {
                 Pic pic = new Pic();
                 java.util.UUID UUID = row.getUUID("picid");
-                Date date = row.getTimestamp("interaction_time");
+                Date date = row.getTimestamp("pic_added");
                 System.out.println("UUID" + UUID.toString());
                 pic.setUUID(UUID);
                 pic.setDate(date);
+                pic.setUser(User);
                 Pics.add(pic);
 
             }
@@ -250,9 +251,25 @@ public class PicModel {
         session.close();
         Pic p = new Pic();
         p.setPic(bImage, length, date, type, name);
+        
         //p.setPic(bImage, length, type);
         return p;
 
     }
+    
+    public boolean deletePic(String user, String uuid, String date)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement psBigTable = session.prepare("delete from pics where picid =?");
+        PreparedStatement psSmallTable = session.prepare("delete from userpiclist where user =? and pic_added=?");
+        BoundStatement boundStatementBigTable = new BoundStatement(psBigTable);
+        BoundStatement boundStatementSmallTable = new BoundStatement(psSmallTable);
+        session.execute(boundStatementBigTable.bind(uuid));
+        session.execute(boundStatementSmallTable.bind(user,date));
+        session.close();
+        return true;
+    }
+    
+    
 
 }
