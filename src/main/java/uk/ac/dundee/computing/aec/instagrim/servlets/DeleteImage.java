@@ -43,11 +43,20 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 public class DeleteImage extends HttpServlet {
     private Cluster cluster;
 
+    /**initiates the cluster for DeleteImage
+     * 
+     * @param config    
+     * @throws ServletException 
+     */
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         cluster = CassandraHosts.getCluster();
     }
     
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             HttpSession session=request.getSession();
             String uuid=request.getParameter("picid");
@@ -60,13 +69,9 @@ public class DeleteImage extends HttpServlet {
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             lg.minusImageCount();
             lg.setDelete(true);
+            session.setAttribute("LoggedIn", lg);
             //RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
             //rd.forward(request,response);
-        response.sendRedirect("/Instagrim");
-        
-        
-        
-        
+        response.sendRedirect("/Instagrim"); 
     }
-   
 }

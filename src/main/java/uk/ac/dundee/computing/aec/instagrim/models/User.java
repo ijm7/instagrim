@@ -29,6 +29,15 @@ public class User {
         
     }
     
+    /**Method to add a user to the database
+     * 
+     * @param username      the username of user
+     * @param Password      the password of user
+     * @param email         the email of user
+     * @param first_name    the first name of user
+     * @param last_name     the last name of user
+     * @return              result of the method
+     */
     public boolean RegisterUser(String username, String Password, String email, String first_name, String last_name){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
@@ -44,18 +53,21 @@ public class User {
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email) Values(?,?,?,?,?)");
         //PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name) Values(?,?,?,?)");
         //PreparedStatement ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
-       
         BoundStatement boundStatement = new BoundStatement(ps);
         session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username,EncodedPassword,first_name,last_name,email));
                         //username,EncodedPassword,first_name,last_name));
                         //username,EncodedPassword));
-        //We are assuming this always works.  Also a transaction would be good here !
-        
         return true;
     }
     
+    /**Checks if the password entered for a user is valid
+     * 
+     * @param username      the username entered
+     * @param Password      the password entered
+     * @return              the result of method
+     */
     public boolean IsValidUser(String username, String Password){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
@@ -78,41 +90,23 @@ public class User {
             return false;
         } else {
             for (Row row : rs) {
-               
                 String StoredPass = row.getString("password");
-                
                 if (StoredPass.compareTo(EncodedPassword) == 0)
                 {
                     return true;
                 }
-                
             }
         }
     return false;  
     }
     
+    /**Checks if an entered username and email are available
+     * 
+     * @param username      the username to check
+     * @param email         the email to check
+     * @return 
+     */
     public boolean IsAvailable(String username, String email){
-        
-        /*Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select from userprofiles where email =?");
-        ResultSet rs = null;
-        BoundStatement boundStatement = new BoundStatement(ps);
-        rs = session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
-                        email));*/
-        
-        /*PreparedStatement ps = session.prepare("select login,email from userprofiles");
-        ResultSet rs = null;
-        rs = session.exec*/
-        
-            //for (Row row : rs) {
-                /*String UserCheck = row.getString("login");
-                String EmailCheck = row.getString("email");
-                if (UserCheck.compareTo(username)==0 && EmailCheck.compareTo(email)==0)
-                {
-                    return true;
-                } */
-                
                 int number=0;
                 Session session = cluster.connect("instagrim");
                 PreparedStatement ps = session.prepare("select COUNT(*) from userprofiles where login =?");
@@ -128,7 +122,6 @@ public class User {
                         number++;
                     }
                 }
-                
                 PreparedStatement ps2 = session.prepare("select COUNT(*) from userprofiles where email =? ALLOW FILTERING");
                 ResultSet rs2 = null;
                 BoundStatement boundStatement2 = new BoundStatement(ps2);
@@ -150,16 +143,13 @@ public class User {
                 {
                     return false;
                 }
-                
-            
-                
-           
-        
-
     }
     
-   
-    
+    /**gets the firstname of the user from the database
+     * 
+     * @param username      the username of the user
+     * @return              the firstname
+     */
     public String getFirstName(String username)
     {
         Session session = cluster.connect("instagrim");
@@ -177,25 +167,32 @@ public class User {
        return StoredPass;   
     }
     
-    public String getImageAmount()
+    /**method for counting the amount of images a user has uploaded
+     * 
+     * @return      the amount of images
+     */
+    public String getImageAmount(String user)
     {
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select COUNT(*) from userpiclist");
+        PreparedStatement ps = session.prepare("select COUNT(*) from userpiclist where user=?");
         BoundStatement boundStatement = new BoundStatement(ps);
         ResultSet rs = null;
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        ));
+                        user));
         long StoredPass=0;
         for (Row row : rs) {
             StoredPass = row.getLong("count");
-                
-                
         }
         String passer=Long.toString(StoredPass);
        return passer;   
     }
     
+    /**gets the last name of the user from the database
+     * 
+     * @param username      the username of the user
+     * @return              the last name
+     */
     public String getLastName(String username)
     {
         Session session = cluster.connect("instagrim");
@@ -208,12 +205,15 @@ public class User {
         String StoredPass=null;
         for (Row row : rs) {
                 StoredPass = row.getString("last_name");
-                
         }
        return StoredPass;
-        
     }
     
+    /**gets the email of the user from the database
+     * 
+     * @param username      the username of the user
+     * @return              the email
+     */
     public String getEmail(String username)
     {
         Session session = cluster.connect("instagrim");
@@ -226,15 +226,16 @@ public class User {
         String StoredPass=null;
         for (Row row : rs) {
                 StoredPass = row.getString("email");
-                
         }
        return StoredPass;
-        
     }
 
-       public void setCluster(Cluster cluster) {
+    /**Sets the cluster for the user
+     * 
+     * @param cluster   the set cluster
+     */    
+    public void setCluster(Cluster cluster) 
+    {
         this.cluster = cluster;
     }
-
-    
 }

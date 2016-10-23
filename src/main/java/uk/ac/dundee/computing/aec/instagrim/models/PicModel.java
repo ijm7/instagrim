@@ -51,24 +51,31 @@ public class PicModel {
 
     }
 
+    /**
+     * 
+     * @param cluster 
+     */
     public void setCluster(Cluster cluster) {
         this.cluster = cluster;
     }
 
-    
+    /**Method that Inserts image into database
+     * 
+     * @param b         a byte
+     * @param type      type of image  
+     * @param name      name of image
+     * @param user      user of image
+     * @param filter    filter applied to image
+     */
     public void insertPic(byte[] b, String type, String name, String user, int filter) {
         try {
             Convertors convertor = new Convertors();
-
             String types[]=Convertors.SplitFiletype(type);
             ByteBuffer buffer = ByteBuffer.wrap(b);
             int length = b.length;
             java.util.UUID picid = convertor.getTimeUUID();
-            
-            //The following is a quick and dirty way of doing this, will fill the disk quickly !
             Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
             FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
-
             output.write(b);
             byte []  thumbb = picresize(picid.toString(),types[1], filter);
             int thumblength= thumbb.length;
@@ -77,25 +84,26 @@ public class PicModel {
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
             Session session = cluster.connect("instagrim");
-
             PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
             PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
             BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
             BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
-
             Date DateAdded = new Date();
-           
-            
-            
             session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
             session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
             session.close();
-
         } catch (IOException ex) {
             System.out.println("Error --> " + ex);
         }
     }
 
+    /**method to resize to thumbnail
+     * 
+     * @param picid     uuid of image
+     * @param type      type of image
+     * @param filter    filter to apply to image
+     * @return          the resized thumbnail
+     */
     public byte[] picresize(String picid,String type, int filter) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
@@ -113,6 +121,13 @@ public class PicModel {
         return null;
     }
     
+    /**method to decolour the image
+     * 
+     * @param picid     uuid of image
+     * @param type      type of image
+     * @param filter    filter to be applied
+     * @return          the bytes of the picture
+     */
     public byte[] picdecolour(String picid,String type, int filter) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
@@ -124,11 +139,16 @@ public class PicModel {
             baos.close();
             return imageInByte;
         } catch (IOException et) {
-
         }
         return null;
     }
 
+    /**Creates thumbnail with filter
+     * 
+     * @param img       the image to be modified
+     * @param filter    the filter to be applied
+     * @return          the thumbnail with filter applied
+     */
     public static BufferedImage createThumbnail(BufferedImage img, int filter) {
         if (filter==1)
         {//grey
@@ -146,38 +166,46 @@ public class PicModel {
         {//normal
             img = resize(img, Method.SPEED, 250, OP_ANTIALIAS);
         }
-        
-        // Let's add a little border before we return result.
         return pad(img, 2);
     }
     
+    /**Creates full size with filter
+     * 
+     * @param img       the image to be modified
+     * @param filter    the filter to be applied
+     * @return          the picture with filter applied
+     */
    public static BufferedImage createProcessed(BufferedImage img, int filter) {
         int Width=img.getWidth()-1;
         if (filter==1)
-        {
+        {//grey
             img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
         }
         else if (filter==2)
-        {
+        {//brighter
             img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_BRIGHTER,  OP_BRIGHTER,OP_BRIGHTER, OP_BRIGHTER, OP_BRIGHTER, OP_BRIGHTER);
         }
         else if (filter==3)
-        {
+        {//darker
             img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_DARKER,  OP_DARKER,OP_DARKER, OP_DARKER, OP_DARKER, OP_DARKER);
         }
         else
-        {
+        {//normal
             img = resize(img, Method.SPEED, Width, OP_ANTIALIAS);
         }
         //OP_GRAYSCALE
         return pad(img, 4);
     }
    
+   /**returns a linked list of pictures
+    * 
+    * @param User   The user whom requests the pictures
+    * @return 
+    */
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select picid,pic_added from userpiclist where user =?");
-        
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -196,12 +224,17 @@ public class PicModel {
                 pic.setDate(date);
                 pic.setUser(User);
                 Pics.add(pic);
-
             }
         }
     return Pics;
     }
 
+    /**Retrieves pictures from database
+     * 
+     * @param image_type    the type of image
+     * @param picid         the uuid of pic to receive
+     * @return              the picture
+     */
     public Pic getPic(int image_type, java.util.UUID picid) {
         Session session = cluster.connect("instagrim");
         ByteBuffer bImage = null;
@@ -213,10 +246,7 @@ public class PicModel {
             Convertors convertor = new Convertors();
             ResultSet rs = null;
             PreparedStatement ps = null;
-            
-         
             if (image_type == Convertors.DISPLAY_IMAGE) {
-                
                 ps = session.prepare("select image,imagelength,interaction_time,type,name from pics where picid =?");
             } else if (image_type == Convertors.DISPLAY_THUMB) {
                 ps = session.prepare("select thumb,imagelength,thumblength,interaction_time,type,name from pics where picid =?");
@@ -227,7 +257,6 @@ public class PicModel {
             rs = session.execute( // this is where the query is executed
                     boundStatement.bind( // here you are binding the 'boundStatement'
                             picid));
-
             if (rs.isExhausted()) {
                 System.out.println("No Images returned");
                 return null;
@@ -249,8 +278,6 @@ public class PicModel {
                     date = row.getTimestamp("interaction_time");
                     type = row.getString("type");
                     name = row.getString("name");
-                    
-
                 }
             }
         } catch (Exception et) {
@@ -260,12 +287,16 @@ public class PicModel {
         session.close();
         Pic p = new Pic();
         p.setPic(bImage, length, date, type, name);
-        
         //p.setPic(bImage, length, type);
         return p;
-
     }
     
+    /**Facility for deleting pictures from database
+     * 
+     * @param picid     the uuid of the picture to be deleted
+     * @param user      the user of the image that will be deleted
+     * @return          the success of the deletion
+     */
     public boolean deletePic(java.util.UUID picid, String user)
     {
        
@@ -287,7 +318,4 @@ public class PicModel {
         session.close();
         return true;
     }
-    
-    
-
 }

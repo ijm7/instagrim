@@ -54,43 +54,26 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         String email=request.getParameter("email");
         String first_name=request.getParameter("first_name");
         String last_name=request.getParameter("last_name");
-        
-        
         User us=new User();
         us.setCluster(cluster);
-        
         boolean space=us.IsAvailable(username, email);
         HttpSession session=request.getSession();
         System.out.println("Session in servlet "+session);
         if (space){
-            
-            
             us.RegisterUser(username, password, email,first_name,last_name);
             LoggedIn lg= new LoggedIn();
             System.out.println("yes");
             lg.setLogedin();
             lg.setUsername(username);
-            /*if (username.equals("majed"))
-            {
-                lg.setAdmin(true);
-            }
-            else
-            {
-                lg.setAdmin(false);
-            }*/
-            
             lg.setUserFirstName(first_name);
             lg.setUserLastName(last_name);
             lg.setUserEmail(email);
-            lg.setImageCount(us.getImageAmount());
-            //request.setAttribute("LoggedIn", lg);
-            
+            lg.setImageCount(us.getImageAmount(username));
             session.setAttribute("LoggedIn", lg);
             System.out.println("Session in servlet "+session);
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
@@ -102,10 +85,8 @@ public class Register extends HttpServlet {
             ErrorCatch err = new ErrorCatch();
             err.setLoginError(true);
             session.setAttribute("ErrorCatch", err);
-            
             response.sendRedirect("/Instagrim/register.jsp");
         }
-        
     }
 
     /**
@@ -117,5 +98,4 @@ public class Register extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

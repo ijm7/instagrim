@@ -11,6 +11,10 @@ public final class Keyspaces {
 
     }
 
+    /**Sets up the Cassandra Database
+     * 
+     * @param c 
+     */
     public static void SetUpKeySpaces(Cluster c) {
         try {
             //Add some keyspaces here

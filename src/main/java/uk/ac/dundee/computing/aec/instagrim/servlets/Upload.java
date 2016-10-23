@@ -26,33 +26,7 @@ public class Upload extends HttpServlet {
         
        RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
         rd.forward(request, response);
-        
     }
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    /*protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Upload</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Upload at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }*/
     
     /**
      * Returns a short description of the servlet.
@@ -63,5 +37,4 @@ public class Upload extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

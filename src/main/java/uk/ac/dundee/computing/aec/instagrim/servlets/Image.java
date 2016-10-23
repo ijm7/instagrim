@@ -96,6 +96,14 @@ public class Image extends HttpServlet {
         }
     }
 
+    /**                 Displays the list of images uploaded by the user       
+     * 
+     * @param User      the user of the images
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     private void DisplayImageList(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
@@ -105,25 +113,22 @@ public class Image extends HttpServlet {
         rd.forward(request, response);
 
     }
-    
-    private void DeleteImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
 
-    }
-
+    /**Displays the image requested
+     * 
+     * @param type      the type of image
+     * @param Image     the uuid of the image
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     private void DisplayImage(int type,String Image, HttpServletResponse response) throws ServletException, IOException {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
-  
-        
         Pic p = tm.getPic(type,java.util.UUID.fromString(Image));
-        
         OutputStream out = response.getOutputStream();
-
         response.setContentType(p.getType());
         response.setContentLength(p.getLength());
-        
-        //out.write(Image);
         InputStream is = new ByteArrayInputStream(p.getBytes());
         BufferedInputStream input = new BufferedInputStream(is);
         byte[] buffer = new byte[8192];
@@ -132,14 +137,21 @@ public class Image extends HttpServlet {
         }
         out.close();
     }
-    
-    
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         for (Part part : request.getParts()) {
             System.out.println("Part Name " + part.getName());
             String imageFilter=request.getParameter("filter");
             int filterNumber;
+            //FILTERS
             if ("blackandwhite".equals(imageFilter))
             {
                 filterNumber=1;
@@ -158,8 +170,6 @@ public class Image extends HttpServlet {
             }
             String type = part.getContentType();
             String filename = part.getSubmittedFileName();
-            
-            
             InputStream is = request.getPart(part.getName()).getInputStream();
             int i = is.available();
             HttpSession session=request.getSession();
@@ -175,21 +185,25 @@ public class Image extends HttpServlet {
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
                 tm.insertPic(b, type, filename, username, filterNumber);
-
                 is.close();
             }
             UploadSuccess upload = new UploadSuccess();
             upload.setUploadSuccess(true);
             session.setAttribute("UploadSuccess", upload);
             lg.addImageCount();
-            //request.setAttribute("LoggedIn", lg);
-            
             session.setAttribute("LoggedIn", lg);
             RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
             rd.forward(request, response);
         }
     }
 
+    /**Activates if an error is found
+     *          
+     * @param mess
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     private void error(String mess, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = null;

@@ -25,23 +25,18 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 @WebServlet(name = "Logout", urlPatterns = {"/Logout"})
 public class Logout extends HttpServlet {
 
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        
-       
         HttpSession session=request.getSession();
-        /*LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-        
-        lg.setLogedout();
-        lg.setUsername(null);*/
         session.invalidate();
-        //session.setAttribute("LoggedIn", lg);
         RequestDispatcher rd = request.getRequestDispatcher("/logout.jsp");
         rd.forward(request, response);
-        
-        //RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-	//rd.forward(request,response);
     }
-        
-   
 }

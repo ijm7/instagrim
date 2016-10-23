@@ -17,16 +17,21 @@ public class UploadSuccess {
 
     }
     
+    /**Setter for the upload success
+     * 
+     * @param upload bool indicating success
+     */
     public void setUploadSuccess(boolean upload)
     {
         this.uploadComplete=upload;
     }
     
+    /**Getter for the upload success
+     *  
+     * @return the bool indicating success
+     */
     public boolean getUploadSuccess()
     {
         return uploadComplete;
     }
-    
-    
-    
 }

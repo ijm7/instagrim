@@ -56,10 +56,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        
         User us=new User();
         us.setCluster(cluster);
         boolean isValid=us.IsValidUser(username, password);
@@ -69,43 +67,25 @@ public class Login extends HttpServlet {
             LoggedIn lg= new LoggedIn();
             lg.setLogedin();
             lg.setUsername(username);
-            /*if (username=="majed")
-            {
-               lg.setAdmin(true);
-            }
-            else
-            {
-                 lg.setAdmin(false);
-            }*/
             String firstName = us.getFirstName(username);
             String lastName = us.getLastName(username);
             String email = us.getEmail(username);
-            
             lg.setUserFirstName(firstName);
             lg.setUserLastName(lastName);
             lg.setUserEmail(email);
-            lg.setImageCount(us.getImageAmount());
-            //request.setAttribute("LoggedIn", lg);
-            
+            lg.setImageCount(us.getImageAmount(username));
             session.setAttribute("LoggedIn", lg);
             System.out.println("Session in servlet "+session);
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 	    rd.forward(request,response);
-            
-        }else{
+        }else{  //LOGIN UNSUCCESSFUL
             ErrorCatch err = new ErrorCatch();
             err.setLoginError(true);
             session.setAttribute("ErrorCatch", err);
             response.sendRedirect("/Instagrim/login.jsp");
         }
-        
     }
     
-    
-    
-    
-    
-
     /**
      * Returns a short description of the servlet.
      *

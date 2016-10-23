@@ -48,7 +48,7 @@
                     <br>
                     <br>
     <div class="pictureformat">
-        <table style="width:35%;"><tr>           
+        <table><tr>           
                 <th colspan="2">Your Details</th>
                     </tr>
                     <tr><td><b>Username</b></td><td><p><%=lg.getUsername()%></p></td></tr>

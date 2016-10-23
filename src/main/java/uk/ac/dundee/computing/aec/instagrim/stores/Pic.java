@@ -30,20 +30,32 @@ public class Pic {
     public void Pic() {
 
     }
+    
+    /**Setter for the UUID
+     * 
+     * @param UUID the uuid
+     */
     public void setUUID(java.util.UUID UUID){
         this.UUID =UUID;
     }
+    
+    /**Getter for the UUID
+     * 
+     * @return the uuid
+     */
     public String getSUUID(){
         return UUID.toString();
     }
     
-    /*public void setPic(ByteBuffer bImage, int length,String type) {
-        this.bImage = bImage;
-        this.length = length;
-        this.type=type;
-        
-    }*/
     
+    /**Sets details about the picture
+     * 
+     * @param bImage    the image bytebuffer
+     * @param length    the length of the image file
+     * @param date      the date of image upload
+     * @param type      the type of image
+     * @param name      the name of the image
+     */
     public void setPic(ByteBuffer bImage, int length,Date date, String type, String name) {
         this.bImage = bImage;
         this.length = length;
@@ -52,16 +64,28 @@ public class Pic {
         this.name=name;
     }
     
+    /**Setter for the date
+     * 
+     * @param date the date
+     */
     public void setDate(Date date)
     {
         this.date=date;
     }
     
+    /**Getter for the date
+     * 
+     * @return the date
+     */
     public Date getDate()
     {
         return date;
     }
     
+    /**Getter for the date in text
+     * 
+     * @return the date in text
+     */
     public String getTextDate()
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
@@ -72,42 +96,70 @@ public class Pic {
         return textDate;
     }
     
+    /**Getter for the bytebuffer
+     * 
+     * @return the bytebuffer
+     */
     public ByteBuffer getBuffer() {
         return bImage;
     }
 
+    /**Getter for the length
+     * 
+     * @return the length
+     */
     public int getLength() {
         return length;
     }
     
+    /**Getter for the type
+     * 
+     * @return the type
+     */
     public String getType(){
         return type;
     }
     
+    /**Getter for the name
+     * 
+     * @return the name
+     */
     public String getName()
     {
         return name;
     }
     
+    /**Setter for the name
+     * 
+     * @param name the name
+     */
     public void setName(String name)
     {
         this.name=name;
     }
     
+    /**Getter for the username
+     * 
+     * @return the username
+     */
     public String getUser()
     {
         return user;
     }
     
+    /**Setter for the user
+     * 
+     * @param user sets the user
+     */
     public void setUser(String user)
     {
         this.user=user;
     }
-    
-    
-    
-    
 
+    /**Getter for the byte array
+     * 
+     * @return the byte array
+     */
     public byte[] getBytes() {
          
         byte image[] = Bytes.getArray(bImage);

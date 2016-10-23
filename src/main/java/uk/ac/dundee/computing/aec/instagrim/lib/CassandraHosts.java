@@ -28,10 +28,19 @@ public final class CassandraHosts {
 
     }
 
+    /**Getter for the host
+     * 
+     * @return the host
+     */
     public static String getHost() {
         return (Host);
     }
 
+    /**Gets the hosts for the cassandra cluster
+     * 
+     * @param cluster the cluster to find the hosts of 
+     * @return the hosts
+     */
     public static String[] getHosts(Cluster cluster) {
 
         if (cluster == null) {
@@ -63,6 +72,10 @@ public final class CassandraHosts {
         return sHosts;
     }
 
+    /**Getter for the cluster
+     * 
+     * @return the cluster
+     */
     public static Cluster getCluster() {
         System.out.println("getCluster");
         cluster = Cluster.builder()
@@ -76,6 +89,9 @@ public final class CassandraHosts {
 
     }
 
+    /**method for closing the cluster
+     * 
+     */
     public void close() {
         cluster.close();
     }

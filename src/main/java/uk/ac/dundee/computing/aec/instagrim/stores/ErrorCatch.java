@@ -16,10 +16,18 @@ public class ErrorCatch {
         
     }
     
+    /**Setter for the login error
+     * 
+     * @param result 
+     */
     public void setLoginError(boolean result){
         this.logError=result;
     }
     
+    /**Getter for the login error
+     * 
+     * @return 
+     */
     public boolean getLoginError(){
         return logError;
     }
