@@ -28,16 +28,12 @@
                 <li><a href="/Instagrim/Profile">Your Profile</a></li>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-                
             </ul>
         </nav>
- 
         <article>
             <h3>File Upload</h3>
             <form method="POST" enctype="multipart/form-data" action="Image">
-                <p class="loggtext">File to upload: <input type="file" name="upfile"></p><br/>
-
-                
+                <p class="loggtext">File to upload: <input type="file" name="upfile"></p><br/>   
             <div class="filterformat">    
                     <table style="width:20%;"><tr>
                     
@@ -52,16 +48,13 @@
             </div>
                     <br>
                     <br>
-                    
                 <div class="centerer">    
                 <input class="imasubmit" type="submit" value="Press">
                 </div>
             </form>
             <%
-                        
                         UploadSuccess upload  = (UploadSuccess) session.getAttribute("UploadSuccess");
                         if (upload != null) {
-                            
                             if (upload.getUploadSuccess()) {
                                 upload.setUploadSuccess(false);
                     %>
@@ -69,12 +62,6 @@
                     <%}}%>
             <br>
             <br>
-            <form action="">
-                <div class="centerer">
-                
-                </div>
-            </form>
-
         </article>
         <footer>
             <ul>

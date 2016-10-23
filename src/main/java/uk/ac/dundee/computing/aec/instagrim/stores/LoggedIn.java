@@ -19,6 +19,7 @@ public class LoggedIn {
     private boolean logError=false;
     private boolean admin=false;
     private String count=null;
+    private boolean delete=false;
     public void LogedIn(){
         
     }
@@ -94,9 +95,26 @@ public class LoggedIn {
         int b = a + 1;
         count = Integer.toString(b);
     }
+    
+    public void minusImageCount()
+    {
+        int a = Integer.parseInt(count);
+        int b = a - 1;
+        count = Integer.toString(b);
+    }
     public void setImageCount(String count)
     {
         this.count=count;
+    }
+    
+    public void setDelete(boolean delete)
+    {
+        this.delete=delete;
+    }
+    
+    public boolean getDelete()
+    {
+        return delete;
     }
     
 }

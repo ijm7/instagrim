@@ -12,7 +12,6 @@
         <title>Instagrim</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
       
-       
     </head>
     <body>
         <header>
@@ -26,7 +25,6 @@
                 <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
-       
         <!--<article>
             <h3>Register as user</h3>
             <form method="POST"  action="Register">
@@ -42,20 +40,14 @@
     <logg>
         <form method="POST"  action="Register">
             <br>
-        
         <p class="loggtext">User Name</p><input type="text" name="username" required>
         <p class="loggtext">Password</p><input type="password" name="password" required>
         <p class="loggtext">First Name</p><input type="text" name="first_name" required>
         <p class="loggtext">Last Name</p><input type="text" name="last_name" required>
         <p class="loggtext">Email Address</p><input type="email" name="email" required>
-        
-        
                 <br/>
                 <br/>
-                
-                
-               <%
-                        
+               <%   
                         ErrorCatch err  = (ErrorCatch) session.getAttribute("ErrorCatch");
                         if (err != null) {
                             boolean error = err.getLoginError();
@@ -69,7 +61,6 @@
                 <input type="submit" value="Register"> 
         </form>
         <br>
-       
     </logg>
         <footer>
             <ul>

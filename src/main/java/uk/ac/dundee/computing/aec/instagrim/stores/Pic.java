@@ -64,9 +64,9 @@ public class Pic {
     
     public String getTextDate()
     {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ", Locale.ENGLISH);
-        TimeZone zone = TimeZone.getTimeZone("+0000");
-        df.setTimeZone(zone);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        //TimeZone zone = TimeZone.getTimeZone("UTC");
+        //df.setTimeZone(zone);
         
         String textDate = df.format(date);
         return textDate;

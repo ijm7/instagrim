@@ -32,6 +32,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.UUID;
+import javax.servlet.http.HttpSession;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 /**
  *
  * @author iainmorton
@@ -46,25 +49,21 @@ public class DeleteImage extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+            HttpSession session=request.getSession();
             String uuid=request.getParameter("picid");
             String user=request.getParameter("picuser");
-            String date=request.getParameter("picadded");
             java.util.UUID convuuid;
-            convuuid = java.util.UUID.fromString(uuid);
-            /*DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ", Locale.ENGLISH);
-            TimeZone zone = TimeZone.getTimeZone("+0000");
-            format.setTimeZone(zone);
-            
-            Date dateconv = format.parse(date);*/
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssZ", Locale.ENGLISH);
-            LocalDate dateconv = LocalDate.parse(date, formatter);
-            java.util.Date check = java.sql.Date.valueOf(dateconv);
+            convuuid = UUID.fromString(uuid);
             PicModel tm = new PicModel();
             tm.setCluster(cluster);
-            tm.deletePic(convuuid,user,check);
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-            rd.forward(request,response);
+            tm.deletePic(convuuid,user);
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            lg.minusImageCount();
+            lg.setDelete(true);
+            //RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+            //rd.forward(request,response);
+        response.sendRedirect("/Instagrim");
+        
         
         
         

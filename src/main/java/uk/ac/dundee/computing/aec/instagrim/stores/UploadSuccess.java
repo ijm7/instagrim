@@ -12,6 +12,7 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
 public class UploadSuccess {
     
     private boolean uploadComplete=false;
+    private boolean imageDeleted=false;
     public void UploadSuccess() {
 
     }
@@ -25,6 +26,7 @@ public class UploadSuccess {
     {
         return uploadComplete;
     }
+    
     
     
 }

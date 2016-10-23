@@ -55,6 +55,7 @@ public class PicModel {
         this.cluster = cluster;
     }
 
+    
     public void insertPic(byte[] b, String type, String name, String user, int filter) {
         try {
             Convertors convertor = new Convertors();
@@ -265,17 +266,24 @@ public class PicModel {
 
     }
     
-    public boolean deletePic(java.util.UUID picid, String user, Date pic_added)
+    public boolean deletePic(java.util.UUID picid, String user)
     {
        
-        
+        ResultSet rs = null;
+        Date date=null;
         Session session = cluster.connect("instagrim");
+        PreparedStatement findDate = session.prepare("select interaction_time from pics where picid =?");
+        BoundStatement boundStatementFindDate = new BoundStatement(findDate);
+        rs=session.execute(boundStatementFindDate.bind(picid));
+        for (Row row : rs) {
+            date = row.getTimestamp("interaction_time");
+        }
         PreparedStatement psBigTable = session.prepare("delete from pics where picid =?");
         PreparedStatement psSmallTable = session.prepare("delete from userpiclist where user =? and pic_added=?");
         BoundStatement boundStatementBigTable = new BoundStatement(psBigTable);
         BoundStatement boundStatementSmallTable = new BoundStatement(psSmallTable);
         session.execute(boundStatementBigTable.bind(picid));
-        session.execute(boundStatementSmallTable.bind(user,pic_added));
+        session.execute(boundStatementSmallTable.bind(user,date));
         session.close();
         return true;
     }
