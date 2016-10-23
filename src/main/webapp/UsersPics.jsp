@@ -86,11 +86,11 @@
         <tr>
         
             <td style="width:20%;"><a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a></td>
-            <td><p class="loggtext">Date and Time of upload: <%=p.getDate().toString()%> <%=p.getSUUID()%> <%=p.getUser()%></p></td>
+            <td><p class="loggtext">Date and Time of upload: <%=p.getTextDate()%> <%=p.getSUUID()%> <%=p.getUser()%></p></td>
             <td style="width:25%;"><form method="GET" enctype="multipart/form-data" action="DeleteImage">
                     <input type="hidden" name="picid" value="<%=p.getSUUID().toString()%>">
                     <input type="hidden" name="picuser" value="<%=p.getUser()%>">
-                    <input type="hidden" name="picadded" value="<%=p.getDate().toString()%>">
+                    <input type="hidden" name="picadded" value="<%=p.getTextDate()%>">
                     <input type="submit" value="Delete"></form>
                     
             <br></td></tr><%

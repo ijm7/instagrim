@@ -10,6 +10,8 @@ import java.nio.ByteBuffer;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
 /**
  *
  * @author Administrator
@@ -62,7 +64,10 @@ public class Pic {
     
     public String getTextDate()
     {
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ", Locale.ENGLISH);
+        TimeZone zone = TimeZone.getTimeZone("+0000");
+        df.setTimeZone(zone);
+        
         String textDate = df.format(date);
         return textDate;
     }

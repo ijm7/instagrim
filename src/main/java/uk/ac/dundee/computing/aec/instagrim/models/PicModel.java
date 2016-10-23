@@ -28,11 +28,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Locale;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
+import java.util.UUID;
+import java.util.Calendar;
 
 import uk.ac.dundee.computing.aec.instagrim.lib.*;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
@@ -78,6 +83,9 @@ public class PicModel {
             BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
 
             Date DateAdded = new Date();
+           
+            
+            
             session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
             session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
             session.close();
@@ -257,15 +265,17 @@ public class PicModel {
 
     }
     
-    public boolean deletePic(String user, String uuid, String date)
+    public boolean deletePic(java.util.UUID picid, String user, Date pic_added)
     {
+       
+        
         Session session = cluster.connect("instagrim");
         PreparedStatement psBigTable = session.prepare("delete from pics where picid =?");
         PreparedStatement psSmallTable = session.prepare("delete from userpiclist where user =? and pic_added=?");
         BoundStatement boundStatementBigTable = new BoundStatement(psBigTable);
         BoundStatement boundStatementSmallTable = new BoundStatement(psSmallTable);
-        session.execute(boundStatementBigTable.bind(uuid));
-        session.execute(boundStatementSmallTable.bind(user,date));
+        session.execute(boundStatementBigTable.bind(picid));
+        session.execute(boundStatementSmallTable.bind(user,pic_added));
         session.close();
         return true;
     }
